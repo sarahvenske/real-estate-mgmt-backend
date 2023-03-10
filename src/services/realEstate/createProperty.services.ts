@@ -1,0 +1,7 @@
+const createPropertyService = () => {
+
+}
+
+export { 
+    createPropertyService
+}

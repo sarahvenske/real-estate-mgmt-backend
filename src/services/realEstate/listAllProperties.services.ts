@@ -1,0 +1,7 @@
+const listAllPropertiesService = () => {
+
+}
+
+export { 
+    listAllPropertiesService
+}

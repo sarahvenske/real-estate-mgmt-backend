@@ -1,0 +1,7 @@
+const softDeleteUserService = () => {
+
+}
+
+export {
+    softDeleteUserService
+}

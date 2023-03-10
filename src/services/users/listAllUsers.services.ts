@@ -1,0 +1,7 @@
+const listAllUsersService = () => {
+
+}
+
+export {
+    listAllUsersService
+}

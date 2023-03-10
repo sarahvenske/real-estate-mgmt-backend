@@ -1,0 +1,7 @@
+const listPropertySchedulesService = () => {
+
+}
+
+export {
+    listPropertySchedulesService
+}
