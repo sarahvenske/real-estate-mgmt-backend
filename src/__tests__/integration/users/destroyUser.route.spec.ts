@@ -75,7 +75,7 @@ describe('DELETE /users', () => {
         'Authorization',
         `Bearer ${tokenMock.genToken(userNotAdmin.admin, userNotAdmin.id)}`
       );
-
+    console.log(response.body)
     const expectResults = {
       status: 404,
       bodyEqual: { message: 'User not found' },

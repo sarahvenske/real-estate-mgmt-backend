@@ -22,17 +22,17 @@ class RealEstate {
     @Column({ default: false })
     sold: boolean
 
-    @Column({ type: "decimal", precision: 12, scale: 2 })
-    value: number
+    @Column({ type: "decimal", precision: 12, scale: 2, default: 0 })
+    value: number | string
 
-    @Column({ type: "integer" })
+    @Column({ type: "int" })
     size: number
  
-    @CreateDateColumn({ type: "timestamp" })
-    createdAt: string
+    @CreateDateColumn({ type: "date" })
+    createdAt: Date | string
     
-    @UpdateDateColumn({ type: "timestamp" })
-    updatedAt: string
+    @UpdateDateColumn({ type: "date" })
+    updatedAt: Date | string
 
     @OneToOne(() => Address)
     @JoinColumn()

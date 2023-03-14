@@ -3,11 +3,17 @@ import {
     createScheduleController,
     listPropertySchedulesController
 } from "../controllers"
+import { 
+    ensureDataIsValidMiddleware, 
+    ensureUserIsAdmMiddleware, 
+    ensureUserIsAuthMiddleware 
+} from "../middlewares";
+import { createScheduleSchema } from "../schemas";
 
 const scheduleRouters: Router = Router()
 
-scheduleRouters.post("", createScheduleController)
-scheduleRouters.get("/realEstate/:id", listPropertySchedulesController)
+scheduleRouters.post("", ensureUserIsAuthMiddleware, ensureDataIsValidMiddleware(createScheduleSchema), createScheduleController)
+scheduleRouters.get("/realEstate/:id", ensureUserIsAuthMiddleware, ensureUserIsAdmMiddleware, listPropertySchedulesController)
 
 export {
     scheduleRouters

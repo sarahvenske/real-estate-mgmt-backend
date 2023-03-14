@@ -1,4 +1,4 @@
-import { hashSync } from "bcryptjs"
+import { getRounds, hashSync } from "bcryptjs"
 import {
     Entity,
     Column,
@@ -8,9 +8,7 @@ import {
     DeleteDateColumn,
     BeforeUpdate,
     BeforeInsert,
-    OneToMany
 } from "typeorm"
-import { Schedule } from "./schedule.entity"
 
 @Entity("users")
 class User {
@@ -18,30 +16,35 @@ class User {
     @PrimaryGeneratedColumn("increment")
     id: number
 
-    @Column({ type: "varchar", length: 45 })
+    @Column({ length: 45 })
     name: string
 
-    @Column({ type: "varchar", length: 45, unique: true })
+    @Column({ length: 45, unique: true })
     email: string
 
-    @Column({ type: "boolean"})
+    @Column({ type: "boolean", default: false })
     admin: boolean
 
-    @Column({ type: "varchar", length: 120 })
+    @Column({ length: 120 })
     password: string
 
-    @CreateDateColumn({ type: "timestamp"})
+    @CreateDateColumn({type:"date"})
     createdAt: string
 
-    @UpdateDateColumn({ type: "timestamp"})
+    @UpdateDateColumn({type:"date"})
     updatedAt: string
 
-    @DeleteDateColumn({ type: "timestamp", nullable: true })
+    @DeleteDateColumn({type:"date", nullable: true })
     deletedAt: string | null | undefined
 
-    @OneToMany(() => Schedule, (schedule) => schedule.user,
-    { cascade: true })
-    schedules: Schedule[]
+    @BeforeInsert()
+    @BeforeUpdate()
+    hashPassword(){
+        const isEncrypted = getRounds(this.password)
+        if(!isEncrypted){
+            this.password = hashSync(this.password, 10)
+        }
+    }
     
 }
 

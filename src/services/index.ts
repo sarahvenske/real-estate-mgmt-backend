@@ -4,8 +4,8 @@ import { listCategoryPropertiesService } from "./categories/listCategoryProperti
 
 import { userLoginService } from "./login/userLogin.services"
 
-import { createPropertyService } from "./realEstate/createProperty.services"
-import { listAllPropertiesService } from "./realEstate/listAllProperties.services"
+import { createRealEstateService } from "./realEstate/createRealEstate.services"
+import { listAllRealEstateService } from "./realEstate/listAllRealEstate.services"
 
 import { createScheduleService } from "./schedules/createSchedule.services"
 import { listPropertySchedulesService } from "./schedules/listPropertySchedules.services"
@@ -20,8 +20,8 @@ export {
     listAllCategoriesService,
     listCategoryPropertiesService,
     userLoginService,
-    createPropertyService,
-    listAllPropertiesService,
+    createRealEstateService,
+    listAllRealEstateService,
     createScheduleService,
     listPropertySchedulesService,
     createUserService,

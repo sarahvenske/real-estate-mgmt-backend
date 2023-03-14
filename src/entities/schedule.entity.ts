@@ -1,6 +1,5 @@
 import {
     Entity,
-    Column,
     PrimaryGeneratedColumn,
     CreateDateColumn,
     ManyToOne
@@ -20,7 +19,7 @@ class Schedule {
     @CreateDateColumn({ type: "time" })
     hour: string
 
-    @ManyToOne(() => User, (user) => user.schedules)
+    @ManyToOne(() => User)
     user: User
 
     @ManyToOne(() => RealEstate, (realEstate) => realEstate.schedules)

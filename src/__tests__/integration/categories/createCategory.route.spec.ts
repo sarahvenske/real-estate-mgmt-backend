@@ -69,7 +69,7 @@ describe('POST /categories', () => {
       .post(baseUrl)
       .set('Authorization', `Bearer ${userToken}`)
       .send(createCategoryRouteMock.category);
-
+    console.log(response.body)
     expect(response.status).toBe(errorsMock.forbidden.status);
     expect(response.body).toStrictEqual(errorsMock.forbidden.error);
   });
