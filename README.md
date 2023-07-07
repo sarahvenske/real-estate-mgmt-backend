@@ -1,127 +1,65 @@
-# 🏁 Projeto Final: KImóveis - TypeORM com Relacionamentos
+# Real Estate Management - BackEnd (TypeORM and Entity-Relationship)
 
-Para inciar este projeto, é necessário instalar as dependências, que serão utilizadas nos testes. Portanto utilize o comando abaixo para instalar tais dependências:
+## About
+This is a real estate management backend application. It was built upon an Entity-Relationship Diagram with TypeORM, Express and PostgresSQL.
 
-```bash
-# caso use npm
-npm run i
+## Technologies
+- JavaScript + TypeScript
+- Express
+- Node.js
+- PostgreSQL
+- TypeORM
 
-# caso use yarn
-yarn
-```
+## Endpoints
 
-## Instalação
+| HTTP Method | Description | Endpoint | User Types | Authentication Required |
+| --- | --- | --- | --- | --- |
+| POST | Create User | `/api/users` | Admin and NotAdmin | No Authentication |
+| GET | List All Users | `/api/users` | Admin | Authentication |
+| POST | Update User | `/api/users/user_id` | Admin | Authentication |
+| DELETE | Soft Delete User | `/api/users/user_id` | Admin | Authentication |
+| --- | --- | --- | --- | --- |
+| POST | Login | `/api/login` | Admin and NotAdmin | No Authentication |
+| --- | --- | --- | --- | --- |
+| POST | Create Category | `/api/categories` | Admin | Authentication |
+| GET | List All Categories | `/api/categories` | Admin and NotAdmin | No Authentication |
+| GET | List Category's Properties | `/api/categories/category_id/realEstate` | Admin and NotAdmin | No Authentication |
+| --- | --- | --- | --- | --- |
+| POST | Create Property | `/api/realEstate` | Admin | Authentication |
+| GET | List All Properties | `/api/realEstate` | Admin and NotAdmin | No Authentication |
+| --- | --- | --- | --- | --- |
+| POST | Create Schedule | `/api/schedules` | Admin | Authentication |
+| GET | List Property's Schedules | `/api/schedules/realEstate/realEstate_id` | Admin | Authentication |
 
-Apenas as bibliotecas de teste, ou que os testes dependem, estão no **package.json**. Por isso, instale as dependências do projeto manualmente e não se esqueça de inicia-lo também.
 
-```bash
-# caso use npm
-npm init -y
+## Getting Started
+To run the application locally, follow these steps:
 
-# caso use yarn
-yarn init -y
-```
+1. Clone the repository: **`git clone <repository-url>`**
+2. Navigate to the project directory: **`cd motor-shop-front`**
+3. Install the dependencies: **`npm install`**
+4. Set up your database: We recommend using Postgres, but you can choose any database that suits your needs
+5. Create a .env file based on the provided .env.example file, and fill in the necessary information
+6. Generate a migration file: **`npm run typeorm migration:generate ./src/migrations/migration-name -d ./src/data-source.ts`**
+7. Run migration in the database: **`npm run typeorm migration:run -d ./src/data-source`**
+8. Start the development server: **`npm dev`**
+9. Test and explore the application using your preferred tool (e.g., Insomnia, Postman)
 
-## Dependências dos testes
+## Tests
+This application includes tests that validate if all business rules have been correctly implemented. The tests are located in src/__tests__. The integration subfolder contains the tests, while the mocks subfolder contains the data used for testing. The jest.config.ts file includes some necessary configurations for running the tests. Do not modify any of these files under any circumstances. Modifying them may compromise the integrity of the tests. Also, do not modify the test script in the package.json file. This script is used to run the tests.
 
-Para que os testes funcionem corretamente, existem algumas dependências.
+To run the tests, make sure you are in the project directory in your terminal. Once you are in the correct directory, you can use the following commands:
 
-* O `app` tem que ser exportado como **default** em **src/app.ts**. Exemplo:
+1. Run all tests: **npm run test**
+2. Run all tests with detailed logging: **`npm run test --all`**
+3. Run tests in a specific folder: **`npm run test <subfolder>`**
+4. Run tests in a specific file: **`npm run test <subfolder>/<file>`**
 
-```ts
-export default app
-```
+After running one of the commands, a log will appear in your terminal containing information about the test execution.
 
-* O `AppDataSource` tem que ser exportado em **src/data-source.ts**. Exemplo:
+## Documentation
+Check the application documentation here.
 
-```ts
-export { AppDataSource }
 
-// ou
 
-export const AppDataSource = new DataSource(dataSourceConfig());
-```
 
-* As Entities **tem que ter os respectivos nomes** e **tem que ter a exportação centralizada** em **entities/index.ts**. Exemplo:
-
-```ts
-import { Address } from './<arquivo>';
-import { Category } from './<arquivo>';
-import { RealEstate } from './<arquivo>';
-import { Schedule } from './<arquivo>';
-import { User } from './<arquivo>';
-
-export { Address, RealEstate, Category, User, Schedule };
-```
-
-## Sobre os testes
-
-Essa aplicação possui testes, que serão utilizados para validar, se todas as regras de negócio foram aplicadas de maneira correta.
-
-Os testes estão localizados em `src/__tests__`.
-
-Na subpasta `integration` estão os testes.
-
-Já na subpasta `mocks` estão os dados que serão utilizados para os testes.
-
-No arquivo `jest.config.ts` estão algumas configurações necessárias para os testes rodarem.
-
-**`De modo algum altere qualquer um desses arquivos.`** Isso poderá comprometer a integridade dos testes.
-
-E também não altere o script de `test` localizado no `package.json`. Isso será utilizado para rodar os testes.
-
-## Rodando os testes
-
-Para rodar os testes é necessário que no seu terminal, você esteja dentro do diretório do projeto.
-
-Estando no terminal e dentro do caminho correto, você poderá utilizar os comandos a seguir:
-
-### Rodar todos os testes
-
-```bash
-# caso use npm
-npm run test
-
-# caso use yarn
-yarn test
-```
-
-### Rodar todos os testes e ter um log ainda mais completo
-
-```bash
-# caso use npm
-npm run test --all
-
-# caso use yarn
-yarn test --all
-```
-
-### Rodar os testes de uma pasta específica
-
-> detalhe: repare que tests está envolvido por 2 underlines. Isso se chama ***dunder***.
-
-```bash
-# caso use npm
-npm run test <subpasta>
-
-# caso use yarn
-yarn test <subpasta>
-```
-
-### Rodar os testes de um arquivo específico
-
-```bash
-# caso use npm
-npm run test <subpasta>/<arquivo>
-
-# caso use yarn
-yarn test <subpasta>/<arquivo>
-```
-
-**Caso você queira verificar todas as opções de execução de testes, visite a [Documentação oficial do Jest](https://jestjs.io/docs/cli)**
-
-Após rodar um dos comandos aparecerá um log no seu terminal, contendo as informações da execução do teste.
-
-**Observação:** O teste pode demorar alguns segundos para ser finalizado. Quanto maior for o teste, mais tempo será consumido para a execução.
-
-### Agora que já sabe como iniciar o seu projeto e rodar os testes, é hora de colocar a mão no código
